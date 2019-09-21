@@ -18,3 +18,26 @@ export function isEmptyString (value) {
   return String(value).trim() === ''
 }
 
+export function throttle (fun, wait) {
+  let trotMe = true
+  return function (...args) {
+    if (trotMe) {
+      trotMe = false
+      setTimeout(() => {
+        trotMe = true
+      }, wait)
+      fun.apply(this, args)
+    }
+  }
+}
+
+export function debounce (fun, wait) {
+  let debouceTimer = null
+  return function (...args) {
+    const ctx = this
+    clearTimeout(debouceTimer)
+    debouceTimer = setTimeout(() => {
+      fun.apply(ctx, args)
+    }, wait)
+  }
+}

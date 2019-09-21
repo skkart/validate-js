@@ -28,6 +28,10 @@ export function isString (data) {
   return (typeof data === 'string')
 }
 
+export function isBoolean (data) {
+  return (typeof data === 'boolean')
+}
+
 export function isError (data) {
   return (data instanceof Error)
 }

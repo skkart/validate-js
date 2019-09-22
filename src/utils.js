@@ -92,3 +92,11 @@ export function getObject (obj, dotKey, def = null) {
 
   return mdl
 }
+
+export function truncateText (str, length = 50, ending = '...') {
+  if (str.length > length) {
+    return str.substring(0, length - ending.length) + ending
+  } else {
+    return str
+  }
+}

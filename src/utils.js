@@ -1,4 +1,4 @@
-import {isNumber} from '@/lib/basic'
+import {isNumber, isString} from '@/lib/basic'
 
 export function isUndefined (value) {
   return value === undefined
@@ -65,4 +65,30 @@ export function random (opts = {}) {
     randomCtr++
     return allowFloating ? randHash : Math.round(randHash)
   }
+}
+
+export function refineString (realName, replaceChar) {
+  // Removes all special characters in String and uses Alphanumeric string
+  replaceChar = replaceChar || ''
+  realName = (isString(realName) && realName.length > 0) ? realName : ''
+  const filteredName = realName.replace(/[^\w]/gi, replaceChar)
+  return filteredName.toLowerCase()
+}
+
+export function getObject (obj, dotKey, def = null) {
+
+  var mdl = obj
+  var keySplit = dotKey.split('.')
+
+  for (var i = 0; i < keySplit.length; i++) {
+    if (mdl) {
+      mdl = mdl[keySplit[i]]
+    } else {
+      // console.log("Unable to find nested key : ", keySplit[i], " inside model", obj);
+      mdl = def
+      break
+    }
+  }
+
+  return mdl
 }
